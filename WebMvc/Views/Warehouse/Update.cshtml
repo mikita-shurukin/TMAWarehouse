@@ -1,0 +1,11 @@
+﻿@model WebMvc.Models.Requests.UpdateWarehouseRequest
+
+<h1>Update Warehouse</h1>
+
+<form asp-controller="Warehouse" asp-action="Update" method="post">
+    <div class="form-group">
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" />
+    </div>
+    <button type="submit">Update Warehouse</button>
+</form>

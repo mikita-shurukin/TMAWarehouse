@@ -1,0 +1,41 @@
+﻿@model IEnumerable<WebMvc.Models.Responses.WarehouseItemResponse>
+
+<h1>Items in Warehouse</h1>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Item ID</th>
+                <th>Group ID</th>
+                <th>Group Name</th>
+                <th>
+                    Price
+                    <a href="@Url.Action("GetItems", "Warehouse", new { warehouseId = ViewBag.WarehouseId, sortOrder = "asc" })">Sort Ascending</a> /
+                    <a href="@Url.Action("GetItems", "Warehouse", new { warehouseId = ViewBag.WarehouseId, sortOrder = "desc" })">Sort Descending</a>
+                </th>
+                <th>Unit of Measurement</th>
+                <th>Quantity</th>
+                <th>Storage Location</th>
+                <th>Contact Person</th>
+                <th>Photo</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ItemId</td>
+                    <td>@item.GroupId</td>
+                    <td>@item.GroupName</td>
+                    <td>@item.Price.ToString("C", System.Globalization.CultureInfo.CreateSpecificCulture("uk-UA"))</td>
+                    <td>@item.UnitOfMeasurement</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.StorageLocation</td>
+                    <td>@item.ContactPerson</td>
+                    <td><img src="@item.PhotoUrl" alt="Item Photo" width="100" /></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

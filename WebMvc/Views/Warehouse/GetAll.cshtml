@@ -1,0 +1,66 @@
+﻿@model IEnumerable<WebMvc.DAL.Models.Warehouse>
+
+<h1>Warehouses</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Contact Person</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var warehouse in Model)
+        {
+            <tr>
+                <td>@warehouse.Id</td>
+                <td>@warehouse.Name</td>
+                <td>@warehouse.StorageLocation</td>
+                <td>@warehouse.ContactPerson</td>
+                <td>
+                    <button class="btn btn-danger delete-btn" data-id="@warehouse.Id">Delete</button>
+                    <a href=/api/Warehouse/AddItems class="btn btn-success add-items-btn">Add Items</a>
+                    <a href="/api/Warehouse/Items/@warehouse.Id" class="btn btn-primary">View Items</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-controller="Warehouse" asp-action="Create" class="btn btn-primary">Create New Warehouse</a>
+
+@section Scripts {
+    <script>
+        document.querySelectorAll('.delete-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const id = this.getAttribute('data-id');
+                if (confirm('Are you sure you want to delete this warehouse?')) {
+                    fetch(`/api/Warehouse/${id}`, {
+                        method: 'DELETE'
+                    })
+                        .then(response => {
+                            if (response.ok) {
+                                location.reload();
+                            } else {
+                                console.error('Failed to delete warehouse.');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error occurred while deleting warehouse:', error);
+                        });
+                }
+            });
+        });
+
+        document.querySelectorAll('.add-items-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const id = this.getAttribute('data-id');
+                window.location.href = `/Warehouse/AddItems?warehouseId=${id}`;
+            });
+        });
+    </script>
+}
+

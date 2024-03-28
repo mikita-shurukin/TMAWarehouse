@@ -1,0 +1,25 @@
+﻿<div id="orderList">
+    @foreach (var order in Model)
+    {
+        <div>
+            <p>Order ID: @order.Id</p>
+            <p>Status: @order.Status</p>
+            <p>Comment: @order.Comment</p>
+            <p>Items:</p>
+            <ul>
+                @if (order.OrderPositions != null)
+                {
+                    @foreach (var position in order.OrderPositions)
+                    {
+                        <li>Item ID: @position.ItemId, Quantity: @position.Quantity, Unit of Measurement: @position.UnitOfMeasurement</li>
+                    }
+                }
+            </ul>
+            <p>Price:</p>
+            <p>
+                Action:
+                <a href="@Url.Action("UpdateOrder", "Orders", new { id = order.Id })" class="btn btn-primary">Edit</a>
+            </p>
+        </div>
+    }
+</div>

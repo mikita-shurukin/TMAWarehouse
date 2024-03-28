@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h1>Orders</h1>
+
+<a class="btn btn-primary" href="@Url.Action("GetAllOrders", "Orders")">View Orders</a>
+
+
+<h1>Warehouses</h1>
+<a class="btn btn-primary" href="@Url.Action("GetAll", "Warehouse")">View Warehouses</a>
+
+<h1>ItemGroups</h1>
+<a class="btn btn-primary" href="@Url.Action("Get", "ItemGroups")">View Item groups</a>
+
+<h1>Items</h1>
+<a class="btn btn-primary" href="@Url.Action("Get", "Items")">View items</a>

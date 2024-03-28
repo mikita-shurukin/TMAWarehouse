@@ -1,0 +1,53 @@
+﻿@model WebMvc.Models.Requests.AddItemsRequest
+
+<h1>Add Items to Warehouse</h1>
+
+
+<form id="createAddItemForm" method="post" action="/api/Warehouse/AddItems" enctype="application/json">
+    <div class="mt-3">
+        <label class="form-label">Warehouse ID</label>
+        <input type="number" class="form-control" id="WarehouseId">
+
+        <label class="form-label">Item ID</label>
+        <input type="number" class="form-control" id="ItemId">
+
+        <label class="form-label">Unit Of Measurement</label>
+        <input type="text" class="form-control" id="UnitOfMeasurement">
+
+        <label class="form-label">Quantity</label>
+        <input type="number" class="form-control" id="Quantity">
+    </div>
+
+    <div class="mt-3">
+        <button type="submit" class="btn btn-primary">Create</button>
+    </div>
+</form>
+
+
+<script>
+    document.getElementById('createAddItemForm').addEventListener('submit', function (event) {
+        event.preventDefault(); 
+
+        const formData = {
+            WarehouseId: parseInt(document.getElementById('WarehouseId').value),
+            ItemPositions: [{
+                ItemId: parseInt(document.getElementById('ItemId').value),
+                UnitOfMeasurement: document.getElementById('UnitOfMeasurement').value,
+                Quantity: parseInt(document.getElementById('Quantity').value)
+            }]
+        };
+
+        fetch('/api/Warehouse/AddItems', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+            .then(response => {
+            })
+            .catch(error => {
+            });
+    });
+
+</script>

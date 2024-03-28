@@ -1,0 +1,55 @@
+﻿@model IEnumerable<WebMvc.DAL.Models.ItemGroup>
+
+<h1>Item Group</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var group in Model)
+        {
+            <tr>
+                <td>@group.Id</td>
+                <td>@group.Name</td>
+                <td>
+                    <form method="post" action="/api/ItemGroups/Update">
+                        <input type="hidden" name="id" value="@group.Id">
+                    </form>
+                    <button class="btn btn-danger delete-btn" data-id="@group.Id">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="/api/ItemGroups/Create" class="btn btn-primary">Create Group</a>
+
+@section Scripts {
+    <script>
+        document.querySelectorAll('.delete-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const id = this.getAttribute('data-id');
+                if (confirm('Are you sure you want to delete this item group?')) {
+                    fetch(`/api/ItemGroups/${id}`, {
+                        method: 'DELETE'
+                    })
+                        .then(response => {
+                            if (response.ok) {
+                                location.reload();
+                            } else {
+                                console.error('Failed to delete item group.');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error occurred while deleting item group:', error);
+                        });
+                }
+            });
+        });
+    </script>
+}

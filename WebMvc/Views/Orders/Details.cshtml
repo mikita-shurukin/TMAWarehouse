@@ -1,0 +1,30 @@
+﻿@model WebMvc.Models.Responses.OrderResponse
+
+<h2>Order Details</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Request ID</th>
+            <th>Item ID</th>
+            <th>Unit Of Measurement</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Comment</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.RequestId</td>
+            <td>@Model.ItemId</td>
+            <td>@Model.UnitOfMeasurement</td>
+            <td>@Model.Quantity</td>
+            <td>@Model.Price</td>
+            <td>@Model.Comment</td>
+            <td>@Model.Status</td>
+        </tr>
+    </tbody>
+</table>
+
+<a asp-controller="Orders" asp-action="GetAllOrders" class="btn btn-primary">Back to Orders</a>

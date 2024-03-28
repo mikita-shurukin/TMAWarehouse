@@ -1,0 +1,18 @@
+﻿@model WebMvc.DAL.Models.Order
+
+<h1>Order Details</h1>
+
+@if (Model != null)
+{
+    <div>
+        <p>Order ID: @Model.Id</p>
+        <p>Status: @Model.Status</p>
+        <p>Comment: @Model.Comment</p>
+    </div>
+}
+else
+{
+    <p>Order not found.</p>
+}
+
+<a href="@Url.Action("GetAllOrders", "Orders")">Back to All Orders</a>

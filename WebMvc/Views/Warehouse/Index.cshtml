@@ -1,0 +1,19 @@
+﻿@model IEnumerable<WebMvc.DAL.Models.Warehouse>
+
+<h1>All Warehouses</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Warehouse ID</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var warehouse in Model)
+        {
+            <tr>
+                <td>@warehouse.Id</td>
+            </tr>
+        }
+    </tbody>
+</table>

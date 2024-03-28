@@ -1,0 +1,95 @@
+﻿@model IEnumerable<WebMvc.DAL.Models.Order>
+
+<div>
+    <label for="status">Status:</label>
+    <select id="status">
+        <option value="All">All</option>
+        <option value="New">New</option>
+        <option value="Rejected">Rejected</option>
+        <option value="Success">Success</option>
+    </select>
+</div>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Status</th>
+                <th>Comment</th>
+                <th>Item ID</th>
+                <th>Quantity</th>
+                <th>Unit Of Measurement</th>
+                <th>Price</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <td>@order.Id</td>
+                    <td>@order.Status</td>
+                    <td>@order.Comment</td>
+                    <td>
+                        @if (order.OrderPositions != null)
+                        {
+                            foreach (var position in order.OrderPositions)
+                            {
+                                <div>
+                                    @position.ItemId
+                                </div>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @if (order.OrderPositions != null)
+                        {
+                            foreach (var position in order.OrderPositions)
+                            {
+                                <div>
+                                    @position.Quantity
+                                </div>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @if (order.OrderPositions != null)
+                        {
+                            foreach (var position in order.OrderPositions)
+                            {
+                                <div>
+                                    @position.UnitOfMeasurement
+                                </div>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @if (order.OrderPositions != null)
+                        {
+                            foreach (var position in order.OrderPositions)
+                            {
+                                <div>
+                                    @position.FormattedPrice
+                                </div>
+                            }
+                        }
+                    </td>
+
+                    <td>
+                        <a href="@Url.Action("UpdateOrder", "Orders", new { id = order.Id })" class="btn btn-primary">Edit</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No orders available.</p>
+}
+
+<div>
+    <a href="@Url.Action("Create", "Orders")" class="btn btn-primary">Create Order</a>
+</div>
